@@ -1,0 +1,17 @@
+
+
+name: viennacl
+
+inc: inc
+lib: viennacl
+path: lib
+
+property:
+    org.boost.version: 1.64.0
+
+profile:
+  - name: boost
+    dep:
+      - name: org.boost
+        version: ${org.boost.version}
+        profile: chrono date_time serialization thread

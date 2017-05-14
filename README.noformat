@@ -1,1 +1,5 @@
 ViennaCL wrapper for mkn
+
+If automated build fails consider running as
+
+CC=gcc CXX=g++ LD_LIBRARY_PATH=/path/to/gcc/lib PATH=/path/to/gcc/bin:$PATH ./mkn.sh
