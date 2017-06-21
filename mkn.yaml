@@ -7,7 +7,7 @@ lib: viennacl
 path: lib
 
 property:
-    org.boost.version: 1.64.0
+    org.boost.version: master
 
 profile:
   - name: boost
