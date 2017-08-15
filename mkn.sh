@@ -21,13 +21,12 @@ VER_BOOST="$(mkn -G org.boost.version)"
 
 THREADS="$(nproc --all)"
 
-rm -rf v
-git clone $GIT_OPT $GIT_URL -b $GIT_BNC v --recursive
+[ ! -d "$CWD/viennacl" ] && git clone $GIT_OPT $GIT_URL -b $GIT_BNC viennacl --recursive
 
 KLOG=3 mkn clean build -dtSa "${MKN_CXXR[@]}" -p boost
 
-mkdir -p v/build
-cd v/build
+mkdir -p viennacl/build
+cd viennacl/build
 cmake -DBOOST_INCLUDEDIR=$MKN_REPO/org/boost/$VER_BOOST/b \
    -DBOOST_LIBRARYDIR=$MKN_REPO/org/boost/$VER_BOOST/lib \
    -DCMAKE_INSTALL_PREFIX=$PWD -DCMAKE_BUILD_TYPE=Release ..
@@ -38,15 +37,15 @@ make install
 set -e
 
 cd $CWD
-if [ ! -f "$CWD/v/build/libviennacl/libviennacl.so" ]; then
+if [ ! -f "$CWD/viennacl/build/libviennacl/libviennacl.so" ]; then
 	echo "Building viennacl failed, library not found"
 	exit 1
 fi
 
 rm -rf lib/*
-mv $CWD/v/build/libviennacl/libviennacl.so lib
+mv $CWD/viennacl/build/libviennacl/libviennacl.so lib
 rm -rf inc/*
-cp -r v/viennacl inc
+cp -r viennacl/viennacl inc
 
 echo "Finished successfully"
 exit 0
